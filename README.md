@@ -1,21 +1,33 @@
-# Big-Data-ETL
+# Amazon Outdoors Reviews ETL
 
 # Overview
 
-I performed an ETL process in the cloud and uploaded a DataFrame to an RDS instance as part of an assignment. The assignment involved analyzing Amazon's product review datasets, which are publicly available and quite large. The Outdoor product datasets I chose has and over 2 million rows of data.  This much data makes data analysis very demanding on the average local computer. I used PySpark to perform a statistical analysis of selected data to help conduct ETL. 
+This project demonstrates the Extract, Transform, Load (ETL) process using PySpark and PostgreSQL using Google Colab. The data used in this project are Amazon Reviews of US Outdoor products.
 
+## Requirements
 
-# Extract
+* Google Colab
+* PySpark
+* PostgreSQL
 
-Using pyspark, I imported the S3 bucket and wrote the .gz file into a dataframe. 
+## Setup
+
+1. Make sure you have a Google Colab environment available.
+2. Install Spark, and PostgreSQL JDBC driver.
+3. Set up the environment variables for Java and Spark.
+
+## Extraction
+
+1. Read the Amazon Reviews of US Outdoor data from an S3 Bucket as a Spark DataFrame.
+2. Display the DataFrame and schema.
 
 ![1677778428200](image/README/1677778428200.png)
 
-# Transform
+# Transformation
 
-I tranformed the original dataframe into three dataframes that will be imported into SQL database, ensuring that each table had a common column to support primary and foriegn key connections.
-
-I converted string data to int and datetype as needed. 
+1. Cast columns to appropriate data types.
+2. Create tables: review_id_table, products, customers, and vine_table.
+3. Drop duplicates and perform any necessary column renaming.
 
 ![1677781560554](image/README/1677781560554.png)
 
@@ -35,8 +47,14 @@ Vine Dataframe
 
 ![1677778778132](image/README/1677778778132.png)
 
-# Load
+# Loading
 
-After the dataframes are complete, I can load them to the AWS RDS PostgresSQL dabase called "my_data_class_db"
+1. Configure settings for PostgreSQL RDS.
+2. Load data from the transformed DataFrames into their respective tables in PostgreSQL RDS.
 
 ![1677779046353](image/README/1677779046353.png)
+
+
+## Conclusion
+
+In this project, a successful ETL process was implemented using PySpark to extract data from Amazon Reviews of US Outdoor products, transform the data, and load it into a PostgreSQL database. The demonstration covered working with Spark DataFrames and connecting to a PostgreSQL RDS instance to store the transformed data. This project showcases the power and flexibility of PySpark in handling large datasets and its interoperability with other data storage solutions like PostgreSQL. The ETL pipeline can be further improved and adapted to handle different data sources and transformations as needed.
